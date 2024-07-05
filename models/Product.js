@@ -24,12 +24,28 @@ Product.init(
     },
     // price column
     price: {
-      type: DataTypes.DECIMAL,
+      type: DataTypes.DECIMAL(10, 2),
       allowNull: false,
       validate: {
-        isDecimal: true
-      }
-    },
+        isDecimal: true,
+        isValidDecimal(value) {
+          const stringValue = String(value); // Convert to string for validation
+
+          // Split the string into integer and decimal parts
+          const [integerPart, decimalPart] = stringValue.split('.');
+
+          // Validate precision (total number of digits)
+          if (integerPart.length > 10) {
+            throw new Error('Precision exceeded (max 10 digits)');
+          }
+
+          // Validate scale (number of digits after the decimal point)
+          if (decimalPart && decimalPart.length > 2) {
+            throw new Error('Scale exceeded (max 2 digits)');
+          }
+        }
+      },
+  },
     // stock column
     stock: {
       type: DataTypes.INTEGER,
