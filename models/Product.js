@@ -36,12 +36,12 @@ Product.init(
 
           // Validate precision (total number of digits)
           if (integerPart.length > 10) {
-            throw new Error('Precision exceeded (max 10 digits)');
+            throw new Error('Price cannot exceed a maximum of 10 digitd (including 2 decimal digits).');
           }
 
           // Validate scale (number of digits after the decimal point)
           if (decimalPart && decimalPart.length > 2) {
-            throw new Error('Scale exceeded (max 2 digits)');
+            throw new Error('Price cannot have more than 2 decimal places.');
           }
         }
       },
