@@ -1,9 +1,15 @@
 # ORM Backend
 
+![Node.js](https://img.shields.io/badge/Node.js-14.x-brightgreen)
+![Sequelize](https://img.shields.io/badge/Sequelize-6.x-blue)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-13-blue)
+![License](https://img.shields.io/badge/License-MIT-yellow)
+
 ## Table of Contents
 - [Project Description](#project-description)
 - [Installation](#installation)
 - [Usage](#usage)
+- [Demo Video](#demo-video)
 - [Database Models](#database-models)
   - [Category Model](#category-model)
   - [Product Model](#product-model)
@@ -16,6 +22,7 @@
 - [Error Handling](#error-handling)
 - [Contributing](#contributing)
 - [License](#license)
+- [Acknowledgements](#acknowledgements)
 - [Contact](#contact)
 
 ## Project Description
@@ -26,7 +33,7 @@ The ORM Backend is a Node.js application that uses Sequelize, a promise-based No
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/yourusername/orm-backend.git
+   git clone https://github.com/contra19/orm-backend.git
    cd orm-backend
    ```
 
@@ -36,14 +43,16 @@ The ORM Backend is a Node.js application that uses Sequelize, a promise-based No
    ```
 
 3. Set up the database connection: 
-   - see the .env.TEMPLATE file for instructions
+   - update your connection information in the .env.TEMPLATE file   
    ```sh
    DB_URL='postgres://your-user:YourPassword@yourdatabase:5432/ecommerce_db'
    DB_NAME='ecommerce_db'
    DB_USER='your-user'
    DB_PASSWORD='YourPassword'
    ```
-4. Initialize the database: 
+   - remane .env.TEMPLATE to .env
+
+4. Initialize and seed the database: 
    ```sh
    npm run seed
    ```
@@ -55,31 +64,38 @@ The ORM Backend is a Node.js application that uses Sequelize, a promise-based No
 
 ## Usage
 
-After installation, the server will be running at `http://localhost:3000`. You can use tools like Postman or Insomnia to interact with the API endpoints.
+After installation, the server will be running at `http://localhost:3001`. You can use tools like Postman or Insomnia to interact with the API endpoints.
+If you prefer to run on a different PORT, you can update line 6 in the index.js file to a different port number: 
+```sh
+const PORT = process.env.PORT || 3001; # Update this value to change the port number
+```
+
+## Demo Video
+[Demo Video](https://drive.google.com/file/d/1YsvMU3B5PtBiw9jEVz9JsJ3OMP-a7_Bp/view?usp=sharing)
 
 ## Database Models
 
 ### Category Model
 
-- **id**: Primary key, auto-increment integer.
+- **id**: Primary key, auto-increment integer, not nullable.
 - **category_name**: String, not nullable.
 
 ### Product Model
 
-- **id**: Primary key, auto-increment integer.
+- **id**: Primary key, auto-increment integer, not nullable.
 - **product_name**: String, not nullable.
-- **price**: Decimal, not nullable.
-- **stock**: Integer, not nullable, defaults to 10.
+- **price**: Decimal, not nullable, validated as decimal.
+- **stock**: Integer, not nullable, defaults to 10, validated as numeric
 - **category_id**: Integer, foreign key referencing the `id` in the `Category` model.
 
 ### Tag Model
 
-- **id**: Primary key, auto-increment integer.
+- **id**: Primary key, auto-increment integer, not nullable.
 - **tag_name**: String.
 
 ### ProductTag Model
 
-- **id**: Primary key, auto-increment integer.
+- **id**: Primary key, auto-increment integer, not nullable.
 - **product_id**: Integer, foreign key referencing the `id` in the `Product` model.
 - **tag_id**: Integer, foreign key referencing the `id` in the `Tag` model.
 
@@ -123,9 +139,18 @@ Contributions are welcome! Please follow these steps:
 4. Push to the branch.
 5. Open a pull request.
 
-## License
+## License ![License](https://img.shields.io/badge/License-MIT-yellow)
 
 This project is licensed under the MIT License.
+
+## Acknowledgements
+
+I would like to acknowledge the following individuals and organizations for their contributions to the development of the ORM Backend:
+
+1. **OpenAI**: For providing the AI technology that assisted in the development process.
+2. **Node.js Community**: For creating and maintaining a robust platform that makes building server-side applications efficient and enjoyable.
+3. **PostgreSQL Global Development Group**: For developing a powerful, open-source object-relational database system that forms the backbone of this project.
+4. **Xandromus**: For providieng the starter code. (https://github.com/coding-boot-camp/bookish-sniffle)
 
 ## Contact
 
